@@ -4,9 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sicher zur Schule – Winznau</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzx54pyDOy1oTPKpDqgFGJxQnM=" crossorigin="">
+<!-- Leaflet styling: primary CDN plus alternative for restricted networks. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{--ink:#20363a;--teal:#076b67;--bg:#f3f7f7;--soft:#eaf5f3;--line:#d8e3e1;--muted:#516669;--alert:#88510c}*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}.shell{max-width:880px;margin:30px auto;padding:0 15px 40px}header,.panel{background:#fff;border-radius:16px;padding:clamp(18px,4vw,34px);box-shadow:0 3px 22px #163d3a0c}header{margin-bottom:16px}h1{color:var(--teal);line-height:1.17;margin:0 0 12px;font-size:clamp(26px,4vw,36px)}h2{font-size:23px;color:var(--teal);margin:4px 0 12px}h3{font-size:18px;margin:26px 0 10px}p{margin:8px 0 14px}.small{color:var(--muted);font-size:14px}.notice{padding:12px 15px;border-radius:10px;background:#fff4dc;color:#634006;margin:14px 0}.tip{padding:12px 15px;border-radius:10px;background:var(--soft);margin:12px 0}.progress{display:flex;gap:7px;margin:0 0 16px}.progress span{flex:1;background:#dce8e6;height:7px;border-radius:9px}.progress span.active{background:var(--teal)}fieldset{border:0;padding:0;margin:0 0 23px;min-width:0}legend{font-weight:700;margin-bottom:9px;padding:0}label.option{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;margin:7px 0;cursor:pointer}label.option:has(input:checked){background:var(--soft);border-color:var(--teal)}input[type=checkbox],input[type=radio]{accent-color:var(--teal);margin-top:5px;flex-shrink:0}input[type=text],input[type=number],input[type=email],textarea,select{width:100%;padding:11px;border:1px solid #adbebb;border-radius:8px;background:#fff;color:var(--ink);font:inherit}textarea{min-height:75px;resize:vertical}.field{display:block;margin:13px 0}.field>span{display:block;font-weight:700;margin-bottom:5px}button{font:inherit;cursor:pointer;border-radius:9px;padding:11px 18px;border:1px solid var(--teal);background:var(--teal);color:#fff;font-weight:700}button.secondary{background:#fff;color:var(--teal)}button:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;gap:9px;justify-content:space-between;flex-wrap:wrap;margin-top:24px}.hidden{display:none!important}#map{height:360px;border-radius:10px;border:1px solid var(--line);z-index:0}.pinlist{padding-left:24px}.pinlist li{padding:4px 0}.pinlist button{font-size:13px;padding:3px 7px;margin-left:8px;background:white;color:var(--teal)}.choicegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px}.choicegrid label.option{margin:0}.divider{border-top:1px solid var(--line);margin:22px 0}.crossings{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.crossings label{padding:12px;text-align:center;border:1px solid var(--line);border-radius:9px;cursor:pointer}.crossings label:has(input:checked){border-color:var(--teal);background:var(--soft)}.crossings input{margin-right:4px}.support{border:1px solid var(--line);border-radius:10px;padding:14px;margin:14px 0}.support strong{display:block;margin-bottom:5px}.tag{display:inline-block;background:var(--soft);border-radius:6px;padding:2px 7px;font-size:12px;color:var(--teal)}@media(max-width:600px){.shell{margin:10px auto}#map{height:300px}.crossings{grid-template-columns:repeat(2,1fr)}.actions button{flex:1}}
+
+/* Essential Leaflet layout fallback. Keeps tiles inside map if external CSS is blocked. */
+#map.leaflet-container{position:relative;overflow:hidden;background:#ddd;outline:0;touch-action:pan-x pan-y;isolation:isolate}
+#map .leaflet-pane,#map .leaflet-tile,#map .leaflet-marker-icon,#map .leaflet-marker-shadow,#map .leaflet-tile-container,#map .leaflet-pane>svg,#map .leaflet-pane>canvas,#map .leaflet-zoom-box,#map .leaflet-image-layer,#map .leaflet-layer{position:absolute;left:0;top:0}
+#map .leaflet-pane{z-index:400}#map .leaflet-tile-pane{z-index:200}#map .leaflet-overlay-pane{z-index:400}#map .leaflet-shadow-pane{z-index:500}#map .leaflet-marker-pane{z-index:600}#map .leaflet-tooltip-pane{z-index:650}#map .leaflet-popup-pane{z-index:700}
+#map .leaflet-tile{visibility:inherit;user-select:none;-webkit-user-select:none;max-width:none!important;max-height:none!important}
+#map .leaflet-map-pane,#map .leaflet-tile-pane,#map .leaflet-objects-pane{position:absolute;left:0;top:0}
+#map .leaflet-control-container .leaflet-top,#map .leaflet-control-container .leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}
+#map .leaflet-top{top:0}#map .leaflet-bottom{bottom:0}#map .leaflet-left{left:0}#map .leaflet-right{right:0}
+#map .leaflet-control{position:relative;z-index:800;pointer-events:auto;clear:both}
+#map .leaflet-top .leaflet-control{margin-top:10px}#map .leaflet-left .leaflet-control{margin-left:10px}#map .leaflet-bottom .leaflet-control{margin-bottom:10px}#map .leaflet-right .leaflet-control{margin-right:10px}
+#map .leaflet-control-zoom{border:2px solid #0003;border-radius:5px;background:#fff;overflow:hidden}
+#map .leaflet-control-zoom a{display:block;width:30px;height:30px;text-align:center;line-height:30px;font:bold 22px Arial;text-decoration:none;color:#222;background:#fff;border-bottom:1px solid #ccc}
+#map .leaflet-control-attribution{background:#ffffffbb;font:11px Arial;padding:1px 5px}
+#map .leaflet-interactive{cursor:pointer}#map .leaflet-grab{cursor:grab}#map .leaflet-dragging .leaflet-grab{cursor:grabbing}
+
+/* Responsive local map: pins use percentages of the visible image. */
+#map{height:auto;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#eef1f0;line-height:0;touch-action:manipulation}
+#map img{display:block;width:100%;height:auto;max-width:100%;user-select:none;-webkit-user-drag:none;cursor:crosshair}
+#map .danger-pin{position:absolute;transform:translate(-50%,-100%);z-index:2;border:2px solid white;border-radius:50% 50% 50% 0;rotate:-45deg;background:#d02d2d;color:white;font:700 14px Arial;width:30px;height:30px;display:grid;place-items:center;box-shadow:0 2px 6px #0007;pointer-events:none}
+#map .danger-pin span{rotate:45deg}
+#crossing-image{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);margin:10px 0 16px}
+#map-status{margin:6px 0 12px}
 </style>
 </head>
 <body>
@@ -23,11 +47,11 @@
 <fieldset><legend>Wie gelangen die Kinder üblicherweise zur Schule?</legend><div id="transport"></div></fieldset>
 <fieldset><legend>Wie sicher schätzen Sie den Schulweg insgesamt ein?</legend><label class="field"><select name="safety"><option value="">Bitte wählen</option><option>1 – sehr unsicher</option><option>2 – eher unsicher</option><option>3 – teils/teils</option><option>4 – eher sicher</option><option>5 – sehr sicher</option><option>Kann ich nicht beurteilen</option></select></label></fieldset>
 <h3>Überquerung der Kantonsstrasse</h3><p>Welche Fussgängerstreifen werden auf dem Schulweg benutzt? Mehrfachauswahl möglich.</p>
-<div class="notice"><strong>Standortabgleich noch offen:</strong> Die sieben Nummern sind noch nicht auf der Karte positioniert. Bitte diese Frage erst nach Überprüfung der sieben Übergänge für die Öffentlichkeit freigeben.</div>
+<p class="small">Die Nummern 1–7 entsprechen der markierten Übersicht. Bitte wählen Sie alle benutzten Fussgängerstreifen aus.</p><img id="crossing-image" src="crossings-numbered.png" alt="Sieben nummerierte Fussgängerstreifen an der Kantonsstrasse in Winznau, Nummer 1 bis 7" onerror="this.insertAdjacentText('afterend','Das Bild crossings-numbered.png konnte nicht geladen werden. Bitte Dateinamen in GitHub prüfen.');this.hidden=true">
 <div id="crossings" class="crossings"></div>
 <div id="othercrossings"></div>
 <h3>Gefahrenstellen auf der Karte markieren</h3><p>Tippen Sie auf bis zu <strong>drei</strong> Stellen, an denen Sie eine Gefahr wahrnehmen. Die Markierungen sind unabhängig von den sieben Fussgängerstreifen.</p>
-<div id="map" role="application" aria-label="Karte Winznau zum Markieren von Gefahrenstellen"></div>
+<div id="map" aria-label="Ortsplan Winznau: zur Markierung einer Gefahrenstelle auf die Karte klicken"><img id="map-image" src="ortsplan-cropped.png" alt="Ortsplan Winznau ohne Legende" draggable="false"></div><p id="map-status" class="small" role="status"></p>
 <ol id="pinlist" class="pinlist"></ol><p id="pinmessage" class="small" aria-live="polite">Noch keine Gefahrenstelle markiert.</p>
 <fieldset><legend>Welche Gefahren treten dort auf? (Mehrfachauswahl)</legend><div id="risks"></div></fieldset>
 <fieldset><legend>Was haben Sie selbst beobachtet? (Mehrfachauswahl)</legend><div id="observations"></div></fieldset>
@@ -59,10 +83,9 @@
 </form>
 </main><p class="small" style="text-align:center">Kartenmaterial: © OpenStreetMap-Mitwirkende · Technische Testversion auf GitHub Pages</p>
 </div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 (()=>{
-const el=id=>document.getElementById(id), form=el('survey');let current=1;let map,layer;const pins=[];
+const el=id=>document.getElementById(id), form=el('survey');let current=1;const pins=[];
 function options(id,name,items,type='checkbox'){el(id).innerHTML=items.map((t,i)=>`<label class="option"><input type="${type}" name="${name}" value="${t.replace(/"/g,'&quot;')}"><span>${t}</span></label>`).join('')}
 options('roles','role',['Mutter / Vater','Grossmutter / Grossvater','Betreuungsperson','Anwohner/in','Weitere interessierte Person']);
 options('ages','age',['0–3','4–6','7–9','10–12','13+','Keine Kinder im Schulalter']);
@@ -79,13 +102,27 @@ options('donation','donation',['Ja, eventuell','Vielleicht, erst nach konkretem 
 for(let i=1;i<=7;i++)el('crossings').insertAdjacentHTML('beforeend',`<label><input type="checkbox" name="crossing" value="${i}">Nr. ${i}</label>`);
 options('othercrossings','crossingExtra',['Andere Querungsstelle','Keine Überquerung','Weiss ich nicht']);
 form.addEventListener('change',e=>{const t=e.target;if(t.name==='improvement'&&form.querySelectorAll('[name="improvement"]:checked').length>3){t.checked=false;el('improvementmessage').textContent='Bitte maximal drei Verbesserungen wählen.'}else if(t.name==='improvement')el('improvementmessage').textContent='';if(t.name==='volunteer'){if(t.value==='Derzeit kein Einsatz möglich'&&t.checked)form.querySelectorAll('[name="volunteer"]:not([value="Derzeit kein Einsatz möglich"])').forEach(x=>x.checked=false);else if(t.checked)form.querySelector('[name="volunteer"][value="Derzeit kein Einsatz möglich"]').checked=false;el('volunteerDetails').classList.toggle('hidden',!form.querySelector('[name="volunteer"]:checked:not([value="Derzeit kein Einsatz möglich"])'))}if(t.name==='donation')el('amountBlock').classList.toggle('hidden',t.value==='Nein');if(t.name==='crossingExtra'&&t.checked&&t.value!=='Andere Querungsstelle'){form.querySelectorAll('[name="crossing"]').forEach(x=>x.checked=false)}});
-function initMap(){if(map||!window.L)return;map=L.map('map').setView([47.366,7.935],15);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);layer=L.layerGroup().addTo(map);map.on('click',e=>{if(pins.length>=3){el('pinmessage').textContent='Maximal drei Gefahrenstellen möglich. Entfernen Sie zuerst eine Markierung.';return}pins.push({lat:e.latlng.lat,lng:e.latlng.lng});redrawPins()});setTimeout(()=>map.invalidateSize(),150)}
-function redrawPins(){layer.clearLayers();pins.forEach((p,i)=>L.marker([p.lat,p.lng]).addTo(layer).bindPopup('Gefahrenstelle '+(i+1)));el('pinlist').innerHTML=pins.map((p,i)=>`<li>Gefahrenstelle ${i+1} <button type="button" data-del="${i}">Entfernen</button></li>`).join('');el('pinmessage').textContent=pins.length?`${pins.length} von 3 Gefahrenstellen markiert.`:'Noch keine Gefahrenstelle markiert.'}
+const mapElement=el('map'),mapImage=el('map-image');
+mapImage.addEventListener('error',()=>{el('map-status').textContent='Der Ortsplan konnte nicht geladen werden. Bitte prüfen, ob ortsplan-cropped.png im Hauptverzeichnis von GitHub liegt.'});
+mapElement.addEventListener('click',e=>{
+  if(e.target.closest('.danger-pin') || !mapImage.complete || !mapImage.naturalWidth)return;
+  if(pins.length>=3){el('pinmessage').textContent='Maximal drei Gefahrenstellen möglich. Entfernen Sie zuerst eine Markierung.';return}
+  const r=mapImage.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width*100,y=(e.clientY-r.top)/r.height*100;
+  if(x<0||x>100||y<0||y>100)return;
+  pins.push({x:+x.toFixed(4),y:+y.toFixed(4)});redrawPins();
+});
+function redrawPins(){
+  mapElement.querySelectorAll('.danger-pin').forEach(x=>x.remove());
+  pins.forEach((p,i)=>{const marker=document.createElement('div');marker.className='danger-pin';marker.style.left=p.x+'%';marker.style.top=p.y+'%';const lbl=document.createElement('span');lbl.textContent=i+1;marker.append(lbl);marker.setAttribute('aria-label','Gefahrenstelle '+(i+1));mapElement.append(marker)});
+  el('pinlist').replaceChildren(...pins.map((p,i)=>{const li=document.createElement('li');li.append(document.createTextNode('Gefahrenstelle '+(i+1)+' '));const btn=document.createElement('button');btn.type='button';btn.dataset.del=i;btn.textContent='Entfernen';li.append(btn);return li}));
+  el('pinmessage').textContent=pins.length?`${pins.length} von 3 Gefahrenstellen markiert.`:'Noch keine Gefahrenstelle markiert.';
+}
 el('pinlist').addEventListener('click',e=>{if(e.target.matches('[data-del]')){pins.splice(Number(e.target.dataset.del),1);redrawPins()}});
 function getValues(name){return [...form.querySelectorAll(`[name="${name}"]:checked`)].map(x=>x.value)}
-function show(n){current=n;document.querySelectorAll('.step').forEach(s=>s.classList.toggle('hidden',Number(s.dataset.step)!==n));for(let i=1;i<=4;i++)el('bar'+i).classList.toggle('active',i<=n);el('back').classList.toggle('hidden',n===1);el('next').classList.toggle('hidden',n===4);if(n===1)initMap();if(n===4)summary();window.scrollTo({top:0,behavior:'smooth'})}
-function summary(){const crosses=getValues('crossing');const vol=getValues('volunteer');const values=[['Gefahrenstellen',pins.length+' Markierung(en)'],['Fussgängerstreifen',crosses.length?crosses.join(', ')+' (noch nicht kartiert)':'Keine Auswahl'],['Freiwilligeneinsatz',vol.join(', ')||'Keine Angabe'],['Häufigkeit',getValues('frequency').join(', ')||'Keine Angabe'],['WhatsApp',getValues('whatsapp').join(', ')||'Keine Angabe'],['Finanzielle Unterstützung',getValues('donation').join(', ')||'Keine Angabe']];el('summary').replaceChildren(...values.map(([a,b])=>{let p=document.createElement('p');let strong=document.createElement('strong');strong.textContent=a+': ';p.append(strong,document.createTextNode(b));return p}))}
-el('next').addEventListener('click',()=>{if(current<4)show(current+1)});el('back').addEventListener('click',()=>{if(current>1)show(current-1)});el('restart').addEventListener('click',()=>{form.reset();pins.splice(0);if(layer)redrawPins();el('volunteerDetails').classList.add('hidden');el('amountBlock').classList.add('hidden');show(1)});form.addEventListener('submit',e=>e.preventDefault());show(1);
+function show(n){current=n;document.querySelectorAll('.step').forEach(s=>s.classList.toggle('hidden',Number(s.dataset.step)!==n));for(let i=1;i<=4;i++)el('bar'+i).classList.toggle('active',i<=n);el('back').classList.toggle('hidden',n===1);el('next').classList.toggle('hidden',n===4);if(n===4)summary();window.scrollTo({top:0,behavior:'smooth'})}
+function summary(){const crosses=getValues('crossing');const vol=getValues('volunteer');const values=[['Gefahrenstellen',pins.length+' Markierung(en)'],['Fussgängerstreifen',crosses.length?crosses.join(', ')+'':'Keine Auswahl'],['Freiwilligeneinsatz',vol.join(', ')||'Keine Angabe'],['Häufigkeit',getValues('frequency').join(', ')||'Keine Angabe'],['WhatsApp',getValues('whatsapp').join(', ')||'Keine Angabe'],['Finanzielle Unterstützung',getValues('donation').join(', ')||'Keine Angabe']];el('summary').replaceChildren(...values.map(([a,b])=>{let p=document.createElement('p');let strong=document.createElement('strong');strong.textContent=a+': ';p.append(strong,document.createTextNode(b));return p}))}
+el('next').addEventListener('click',()=>{if(current<4)show(current+1)});el('back').addEventListener('click',()=>{if(current>1)show(current-1)});el('restart').addEventListener('click',()=>{form.reset();pins.splice(0);redrawPins();el('volunteerDetails').classList.add('hidden');el('amountBlock').classList.add('hidden');show(1)});form.addEventListener('submit',e=>e.preventDefault());show(1);
 })();
 </script>
 </body>
