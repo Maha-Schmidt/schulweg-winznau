@@ -1,59 +1,92 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de-CH">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sicher zur Schule – Winznau</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      color: #263238;
-    }
-    main {
-      max-width: 760px;
-      margin: 60px auto;
-      padding: 30px;
-      background: white;
-      border-radius: 16px;
-    }
-    h1 { color: #166c69; }
-    .intro { font-size: 18px; line-height: 1.6; }
-    .step {
-      padding: 18px;
-      margin: 14px 0;
-      background: #edf6f5;
-      border-radius: 10px;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sicher zur Schule – Winznau</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzx54pyDOy1oTPKpDqgFGJxQnM=" crossorigin="">
+<style>
+:root{--ink:#20363a;--teal:#076b67;--bg:#f3f7f7;--soft:#eaf5f3;--line:#d8e3e1;--muted:#516669;--alert:#88510c}*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}.shell{max-width:880px;margin:30px auto;padding:0 15px 40px}header,.panel{background:#fff;border-radius:16px;padding:clamp(18px,4vw,34px);box-shadow:0 3px 22px #163d3a0c}header{margin-bottom:16px}h1{color:var(--teal);line-height:1.17;margin:0 0 12px;font-size:clamp(26px,4vw,36px)}h2{font-size:23px;color:var(--teal);margin:4px 0 12px}h3{font-size:18px;margin:26px 0 10px}p{margin:8px 0 14px}.small{color:var(--muted);font-size:14px}.notice{padding:12px 15px;border-radius:10px;background:#fff4dc;color:#634006;margin:14px 0}.tip{padding:12px 15px;border-radius:10px;background:var(--soft);margin:12px 0}.progress{display:flex;gap:7px;margin:0 0 16px}.progress span{flex:1;background:#dce8e6;height:7px;border-radius:9px}.progress span.active{background:var(--teal)}fieldset{border:0;padding:0;margin:0 0 23px;min-width:0}legend{font-weight:700;margin-bottom:9px;padding:0}label.option{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;margin:7px 0;cursor:pointer}label.option:has(input:checked){background:var(--soft);border-color:var(--teal)}input[type=checkbox],input[type=radio]{accent-color:var(--teal);margin-top:5px;flex-shrink:0}input[type=text],input[type=number],input[type=email],textarea,select{width:100%;padding:11px;border:1px solid #adbebb;border-radius:8px;background:#fff;color:var(--ink);font:inherit}textarea{min-height:75px;resize:vertical}.field{display:block;margin:13px 0}.field>span{display:block;font-weight:700;margin-bottom:5px}button{font:inherit;cursor:pointer;border-radius:9px;padding:11px 18px;border:1px solid var(--teal);background:var(--teal);color:#fff;font-weight:700}button.secondary{background:#fff;color:var(--teal)}button:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;gap:9px;justify-content:space-between;flex-wrap:wrap;margin-top:24px}.hidden{display:none!important}#map{height:360px;border-radius:10px;border:1px solid var(--line);z-index:0}.pinlist{padding-left:24px}.pinlist li{padding:4px 0}.pinlist button{font-size:13px;padding:3px 7px;margin-left:8px;background:white;color:var(--teal)}.choicegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px}.choicegrid label.option{margin:0}.divider{border-top:1px solid var(--line);margin:22px 0}.crossings{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.crossings label{padding:12px;text-align:center;border:1px solid var(--line);border-radius:9px;cursor:pointer}.crossings label:has(input:checked){border-color:var(--teal);background:var(--soft)}.crossings input{margin-right:4px}.support{border:1px solid var(--line);border-radius:10px;padding:14px;margin:14px 0}.support strong{display:block;margin-bottom:5px}.tag{display:inline-block;background:var(--soft);border-radius:6px;padding:2px 7px;font-size:12px;color:var(--teal)}@media(max-width:600px){.shell{margin:10px auto}#map{height:300px}.crossings{grid-template-columns:repeat(2,1fr)}.actions button{flex:1}}
+</style>
 </head>
 <body>
-  <main>
-    <h1>Sicher zur Schule – gemeinsam für Winznau</h1>
-
-    <p class="intro">
-      Ihre Erfahrungen. Ihre Ideen.
-      Unser gemeinsamer Einsatz für sichere Schulwege.
-    </p>
-
-    <div class="step">
-      <h2>1. Schulweg & Gefahrenstellen</h2>
-      <p>Wo sehen Sie Risiken auf dem Schulweg?</p>
-    </div>
-
-    <div class="step">
-      <h2>2. Gemeinsam aktiv werden</h2>
-      <p>Pedibus und Schülerlotsendienst unterstützen.</p>
-    </div>
-
-    <div class="step">
-      <h2>3. Massnahmen unterstützen</h2>
-      <p>Welche Verbesserungen möchten Sie fördern?</p>
-    </div>
-
-    <p><strong>Die Umfrage befindet sich im Aufbau.</strong></p>
-  </main>
+<div class="shell">
+<header><h1>Sicher zur Schule – gemeinsam für Winznau</h1><p>Ihre Erfahrungen. Ihre Ideen. Unser gemeinsamer Einsatz für sichere Schulwege.</p><p class="small">Für Eltern, Grosseltern, Betreuungspersonen und alle interessierten Einwohnerinnen und Einwohner.</p><div class="notice"><strong>Testversion – noch keine Datenerhebung.</strong> Ihre Eingaben werden nicht an uns übermittelt oder gespeichert. Bitte noch keinen QR-Code veröffentlichen.</div></header>
+<main class="panel">
+<div class="progress" aria-label="Fortschritt"><span id="bar1" class="active"></span><span id="bar2"></span><span id="bar3"></span><span id="bar4"></span></div>
+<form id="survey" autocomplete="off">
+<section class="step" data-step="1"><p class="small">Teil 1 von 4</p><h2>Schulweg &amp; Gefahrenstellen</h2>
+<fieldset><legend>In welcher Beziehung stehen Sie zum Schulweg in Winznau? (Mehrfachauswahl)</legend><div id="roles"></div></fieldset>
+<label class="field"><span>In welchem Quartier / Strassenbereich wohnen Sie? (optional, keine genaue Adresse)</span><input name="area" type="text" maxlength="100" placeholder="z. B. Oberdorf"></label>
+<fieldset><legend>Begleiten Sie Kinder auf dem Schulweg?</legend><label class="option"><input type="radio" name="accompany" value="Ja">Ja</label><label class="option"><input type="radio" name="accompany" value="Nein">Nein</label></fieldset>
+<fieldset><legend>Welche Altersgruppen betreffen Sie? (Mehrfachauswahl)</legend><div id="ages" class="choicegrid"></div></fieldset>
+<fieldset><legend>Wie gelangen die Kinder üblicherweise zur Schule?</legend><div id="transport"></div></fieldset>
+<fieldset><legend>Wie sicher schätzen Sie den Schulweg insgesamt ein?</legend><label class="field"><select name="safety"><option value="">Bitte wählen</option><option>1 – sehr unsicher</option><option>2 – eher unsicher</option><option>3 – teils/teils</option><option>4 – eher sicher</option><option>5 – sehr sicher</option><option>Kann ich nicht beurteilen</option></select></label></fieldset>
+<h3>Überquerung der Kantonsstrasse</h3><p>Welche Fussgängerstreifen werden auf dem Schulweg benutzt? Mehrfachauswahl möglich.</p>
+<div class="notice"><strong>Standortabgleich noch offen:</strong> Die sieben Nummern sind noch nicht auf der Karte positioniert. Bitte diese Frage erst nach Überprüfung der sieben Übergänge für die Öffentlichkeit freigeben.</div>
+<div id="crossings" class="crossings"></div>
+<div id="othercrossings"></div>
+<h3>Gefahrenstellen auf der Karte markieren</h3><p>Tippen Sie auf bis zu <strong>drei</strong> Stellen, an denen Sie eine Gefahr wahrnehmen. Die Markierungen sind unabhängig von den sieben Fussgängerstreifen.</p>
+<div id="map" role="application" aria-label="Karte Winznau zum Markieren von Gefahrenstellen"></div>
+<ol id="pinlist" class="pinlist"></ol><p id="pinmessage" class="small" aria-live="polite">Noch keine Gefahrenstelle markiert.</p>
+<fieldset><legend>Welche Gefahren treten dort auf? (Mehrfachauswahl)</legend><div id="risks"></div></fieldset>
+<fieldset><legend>Was haben Sie selbst beobachtet? (Mehrfachauswahl)</legend><div id="observations"></div></fieldset>
+<fieldset><legend>Wann sind diese Situationen besonders problematisch?</legend><div id="problemTimes"></div></fieldset>
+<label class="field"><span>Weitere Hinweise (optional)</span><textarea name="comments" maxlength="800" placeholder="Bitte keine Personennamen nennen."></textarea></label>
+<fieldset><legend>Welche Verbesserungen halten Sie für besonders wichtig? (maximal drei)</legend><div id="improvements"></div><p class="small" id="improvementmessage"></p></fieldset>
+<fieldset><legend>Wer sollte zur Verbesserung beitragen? (Mehrfachauswahl)</legend><div id="stakeholders"></div></fieldset>
+</section>
+<section class="step hidden" data-step="2"><p class="small">Teil 2 von 4</p><h2>Gemeinsam aktiv werden</h2><p>Ein Engagement ist freiwillig. Mit einer Interessensbekundung gehen Sie keine Verpflichtung ein.</p>
+<fieldset><legend>Wie könnten Sie sich engagieren? (Mehrfachauswahl)</legend><div id="volunteers"></div></fieldset>
+<div id="volunteerDetails" class="hidden"><fieldset><legend>Wie häufig könnten Sie ungefähr helfen?</legend><div id="frequencies"></div></fieldset>
+<fieldset><legend>Wären Sie bereit, einer WhatsApp-Gruppe zur weiteren Organisation beizutreten?</legend><label class="option"><input type="radio" name="whatsapp" value="Ja">Ja, gerne</label><label class="option"><input type="radio" name="whatsapp" value="Vielleicht">Vielleicht, zunächst mehr Informationen</label><label class="option"><input type="radio" name="whatsapp" value="Nein">Nein, bitte andere Kontaktmöglichkeit</label></fieldset><p class="small">Bei WhatsApp können andere Gruppenmitglieder Ihre Telefonnummer sehen. Eine separate ausdrückliche Einwilligung wird vor einer Einladung eingeholt.</p></div>
+</section>
+<section class="step hidden" data-step="3"><p class="small">Teil 3 von 4</p><h2>Massnahmen unterstützen</h2><p>Die folgenden Beträge sind unverbindliche Schätzungen, keine verbindlichen Angebote. Die rechtliche und fachliche Eignung der Massnahmen muss zuerst abgeklärt werden.</p>
+<div class="support"><strong>A. Signalisation an der Kantonsstrasse <span class="tag">ca. CHF 2'000</span></strong><p>Zusätzliche Schulweg-Warnsignalisation prüfen (nur bei Zustimmung der zuständigen Stellen).</p><div id="supportA"></div></div>
+<div class="support"><strong>B. Hinweis auf privatem Grundstück <span class="tag">ca. CHF 30</span></strong><p>Ein geeignetes Schulweg-Hinweisschild auf dem eigenen Grundstück ermöglichen.</p><div id="supportB"></div></div>
+<div class="support"><strong>C. Unabhängige Schulweg-Sicherheitsanalyse <span class="tag">ggf. CHF 5'000–6'000</span></strong><p>Ergebnis und Empfehlungen sind offen. Eine kostenlose TCS-Prüfung für die Gemeinde soll zuvor abgeklärt werden.</p><div id="supportC"></div></div>
+<fieldset><legend>Könnten Sie sich grundsätzlich eine unverbindliche finanzielle Unterstützung vorstellen?</legend><div id="donation"></div></fieldset>
+<div id="amountBlock" class="hidden"><label class="field"><span>Möglicher Betrag (CHF, unverbindlich)</span><select name="amount"><option value="">Keine Angabe</option><option>10</option><option>20</option><option>30</option><option>50</option><option>100</option><option>200</option><option>Anderer Betrag / nach Absprache</option></select></label></div>
+<p class="tip">Es wird <strong>kein Geld eingezogen</strong>. Interessensbekundungen sind keine Spendenverpflichtungen.</p>
+</section>
+<section class="step hidden" data-step="4"><p class="small">Abschluss</p><h2>Vielen Dank fürs Mitmachen!</h2><p>Möchten Sie für Rückfragen oder die Organisation freiwillig Ihre Kontaktdaten hinterlassen?</p>
+<div class="notice">In dieser Testversion können noch keine Kontaktdaten sicher übermittelt werden. Deshalb werden Name, Telefonnummer und E-Mail erst eingeführt, wenn das geschützte Datensystem und die Datenschutzhinweise eingerichtet sind.</div>
+<label class="option"><input type="checkbox" name="contactInterest" value="Ja">Ich möchte später für die Organisation kontaktiert werden (unverbindlich).</label>
+<p class="small">Die spätere produktive Umfrage braucht eine Erklärung zum Zweck der Bearbeitung, zu verantwortlichen Personen, Aufbewahrungsdauer und Betroffenenrechten sowie ein sicheres Einwilligungsverfahren.</p>
+<div class="divider"></div><h3>Test-Zusammenfassung</h3><div id="summary" class="tip"></div><button type="button" id="restart" class="secondary">Test neu beginnen</button>
+</section>
+<div class="actions"><button type="button" id="back" class="secondary hidden">Zurück</button><button type="button" id="next">Weiter</button></div>
+</form>
+</main><p class="small" style="text-align:center">Kartenmaterial: © OpenStreetMap-Mitwirkende · Technische Testversion auf GitHub Pages</p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(()=>{
+const el=id=>document.getElementById(id), form=el('survey');let current=1;let map,layer;const pins=[];
+function options(id,name,items,type='checkbox'){el(id).innerHTML=items.map((t,i)=>`<label class="option"><input type="${type}" name="${name}" value="${t.replace(/"/g,'&quot;')}"><span>${t}</span></label>`).join('')}
+options('roles','role',['Mutter / Vater','Grossmutter / Grossvater','Betreuungsperson','Anwohner/in','Weitere interessierte Person']);
+options('ages','age',['0–3','4–6','7–9','10–12','13+','Keine Kinder im Schulalter']);
+options('transport','transport',['Zu Fuss – selbständig','Zu Fuss – in Begleitung','Mit dem Velo','Mit dem Auto / anderen Verkehrsmitteln']);
+options('risks','risk',['Hohe Geschwindigkeit','Schlechte Sicht','Unsichere Querung','Gefährliche Abbiegemanöver','Viel Verkehr','Fehlendes Trottoir','Parkierte Fahrzeuge','Andere Gefahr']);
+options('observations','observation',['Ich empfinde die Stelle als unsicher','Wiederholt gefährliche Situationen beobachtet','Beinahe-Unfall beobachtet','Unfall selbst beobachtet']);
+options('problemTimes','problemTime',['Vor Schulbeginn','Mittags','Nach Schulschluss','Unabhängig von der Tageszeit']);
+options('improvements','improvement',['Sicherere Fussgängerstreifen','Geschwindigkeitsreduktion','Bessere Sichtverhältnisse','Bauliche Verbesserungen / Trottoirs','Mehr Verkehrskontrollen','Lotsendienst / Pedibus','Sensibilisierung / Hinweisschilder','Andere Massnahmen']);
+options('stakeholders','stakeholder',['Gemeinde','Kanton','Schule','Eltern / Elternrat','Anwohnerinnen und Anwohner','Weitere Organisationen']);
+options('volunteers','volunteer',['Schülerlotsendienst','Pedibus','Gelegentliche Stellvertretung','Organisation / Koordination','Derzeit kein Einsatz möglich']);
+options('frequencies','frequency',['1 × pro Woche','2 × pro Woche','3 × pro Woche','4 × pro Woche','5 × pro Woche','Gelegentlich / nach Absprache'],'radio');
+for(const [id,name] of [['supportA','signal'],['supportB','privateSign'],['supportC','audit']])options(id,name,['Ja, unterstütze ich','Vielleicht / mehr Informationen','Nein'],'radio');
+options('donation','donation',['Ja, eventuell','Vielleicht, erst nach konkretem Konzept','Nein'],'radio');
+for(let i=1;i<=7;i++)el('crossings').insertAdjacentHTML('beforeend',`<label><input type="checkbox" name="crossing" value="${i}">Nr. ${i}</label>`);
+options('othercrossings','crossingExtra',['Andere Querungsstelle','Keine Überquerung','Weiss ich nicht']);
+form.addEventListener('change',e=>{const t=e.target;if(t.name==='improvement'&&form.querySelectorAll('[name="improvement"]:checked').length>3){t.checked=false;el('improvementmessage').textContent='Bitte maximal drei Verbesserungen wählen.'}else if(t.name==='improvement')el('improvementmessage').textContent='';if(t.name==='volunteer'){if(t.value==='Derzeit kein Einsatz möglich'&&t.checked)form.querySelectorAll('[name="volunteer"]:not([value="Derzeit kein Einsatz möglich"])').forEach(x=>x.checked=false);else if(t.checked)form.querySelector('[name="volunteer"][value="Derzeit kein Einsatz möglich"]').checked=false;el('volunteerDetails').classList.toggle('hidden',!form.querySelector('[name="volunteer"]:checked:not([value="Derzeit kein Einsatz möglich"])'))}if(t.name==='donation')el('amountBlock').classList.toggle('hidden',t.value==='Nein');if(t.name==='crossingExtra'&&t.checked&&t.value!=='Andere Querungsstelle'){form.querySelectorAll('[name="crossing"]').forEach(x=>x.checked=false)}});
+function initMap(){if(map||!window.L)return;map=L.map('map').setView([47.366,7.935],15);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);layer=L.layerGroup().addTo(map);map.on('click',e=>{if(pins.length>=3){el('pinmessage').textContent='Maximal drei Gefahrenstellen möglich. Entfernen Sie zuerst eine Markierung.';return}pins.push({lat:e.latlng.lat,lng:e.latlng.lng});redrawPins()});setTimeout(()=>map.invalidateSize(),150)}
+function redrawPins(){layer.clearLayers();pins.forEach((p,i)=>L.marker([p.lat,p.lng]).addTo(layer).bindPopup('Gefahrenstelle '+(i+1)));el('pinlist').innerHTML=pins.map((p,i)=>`<li>Gefahrenstelle ${i+1} <button type="button" data-del="${i}">Entfernen</button></li>`).join('');el('pinmessage').textContent=pins.length?`${pins.length} von 3 Gefahrenstellen markiert.`:'Noch keine Gefahrenstelle markiert.'}
+el('pinlist').addEventListener('click',e=>{if(e.target.matches('[data-del]')){pins.splice(Number(e.target.dataset.del),1);redrawPins()}});
+function getValues(name){return [...form.querySelectorAll(`[name="${name}"]:checked`)].map(x=>x.value)}
+function show(n){current=n;document.querySelectorAll('.step').forEach(s=>s.classList.toggle('hidden',Number(s.dataset.step)!==n));for(let i=1;i<=4;i++)el('bar'+i).classList.toggle('active',i<=n);el('back').classList.toggle('hidden',n===1);el('next').classList.toggle('hidden',n===4);if(n===1)initMap();if(n===4)summary();window.scrollTo({top:0,behavior:'smooth'})}
+function summary(){const crosses=getValues('crossing');const vol=getValues('volunteer');const values=[['Gefahrenstellen',pins.length+' Markierung(en)'],['Fussgängerstreifen',crosses.length?crosses.join(', ')+' (noch nicht kartiert)':'Keine Auswahl'],['Freiwilligeneinsatz',vol.join(', ')||'Keine Angabe'],['Häufigkeit',getValues('frequency').join(', ')||'Keine Angabe'],['WhatsApp',getValues('whatsapp').join(', ')||'Keine Angabe'],['Finanzielle Unterstützung',getValues('donation').join(', ')||'Keine Angabe']];el('summary').replaceChildren(...values.map(([a,b])=>{let p=document.createElement('p');let strong=document.createElement('strong');strong.textContent=a+': ';p.append(strong,document.createTextNode(b));return p}))}
+el('next').addEventListener('click',()=>{if(current<4)show(current+1)});el('back').addEventListener('click',()=>{if(current>1)show(current-1)});el('restart').addEventListener('click',()=>{form.reset();pins.splice(0);if(layer)redrawPins();el('volunteerDetails').classList.add('hidden');el('amountBlock').classList.add('hidden');show(1)});form.addEventListener('submit',e=>e.preventDefault());show(1);
+})();
+</script>
 </body>
 </html>
