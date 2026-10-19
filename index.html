@@ -47,18 +47,15 @@
 <fieldset><legend>Wie gelangen die Kinder üblicherweise zur Schule?</legend><div id="transport"></div></fieldset>
 <fieldset><legend>Wie sicher schätzen Sie den Schulweg insgesamt ein?</legend><label class="field"><select name="safety"><option value="">Bitte wählen</option><option>1 – sehr unsicher</option><option>2 – eher unsicher</option><option>3 – teils/teils</option><option>4 – eher sicher</option><option>5 – sehr sicher</option><option>Kann ich nicht beurteilen</option></select></label></fieldset>
 <h3>Überquerung der Kantonsstrasse</h3><p>Welche Fussgängerstreifen werden auf dem Schulweg benutzt? Mehrfachauswahl möglich.</p>
-<p class="small">Die Nummern 1–7 entsprechen der markierten Übersicht. Bitte wählen Sie alle benutzten Fussgängerstreifen aus.</p><img id="crossing-image" src="Crossings.png" alt="Sieben nummerierte Fussgängerstreifen an der Kantonsstrasse in Winznau, Nummer 1 bis 7" onerror="this.insertAdjacentText('afterend','Das Bild Crossings.png konnte nicht geladen werden. Bitte Dateinamen in GitHub prüfen.');this.hidden=true">
+<p class="small">Die Nummern 1–7 entsprechen der markierten Übersicht. Bitte wählen Sie alle benutzten Fussgängerstreifen aus.</p><img id="crossing-image" src="crossings-numbered.png" alt="Sieben nummerierte Fussgängerstreifen an der Kantonsstrasse in Winznau, Nummer 1 bis 7" onerror="this.insertAdjacentText('afterend','Das Bild crossings-numbered.png konnte nicht geladen werden. Bitte Dateinamen in GitHub prüfen.');this.hidden=true">
 <div id="crossings" class="crossings"></div>
 <div id="othercrossings"></div>
 <h3>Gefahrenstellen auf der Karte markieren</h3><p>Tippen Sie auf bis zu <strong>drei</strong> Stellen, an denen Sie eine Gefahr wahrnehmen. Die Markierungen sind unabhängig von den sieben Fussgängerstreifen.</p>
-<div id="map" aria-label="Ortsplan Winznau: zur Markierung einer Gefahrenstelle auf die Karte klicken"><img id="map-image" src="Ortsplan_1.png" alt="Ortsplan Winznau ohne Legende" draggable="false"></div><p id="map-status" class="small" role="status"></p>
+<div id="map" aria-label="Ortsplan Winznau: zur Markierung einer Gefahrenstelle auf die Karte klicken"><img id="map-image" src="ortsplan-cropped.png" alt="Ortsplan Winznau ohne Legende" draggable="false"></div><p id="map-status" class="small" role="status"></p>
 <ol id="pinlist" class="pinlist"></ol><p id="pinmessage" class="small" aria-live="polite">Noch keine Gefahrenstelle markiert.</p>
 <fieldset><legend>Welche Gefahren treten dort auf? (Mehrfachauswahl)</legend><div id="risks"></div></fieldset>
-<fieldset><legend>Was haben Sie selbst beobachtet? (Mehrfachauswahl)</legend><div id="observations"></div></fieldset>
 <fieldset><legend>Wann sind diese Situationen besonders problematisch?</legend><div id="problemTimes"></div></fieldset>
 <label class="field"><span>Weitere Hinweise (optional)</span><textarea name="comments" maxlength="800" placeholder="Bitte keine Personennamen nennen."></textarea></label>
-<fieldset><legend>Welche Verbesserungen halten Sie für besonders wichtig? (maximal drei)</legend><div id="improvements"></div><p class="small" id="improvementmessage"></p></fieldset>
-<fieldset><legend>Wer sollte zur Verbesserung beitragen? (Mehrfachauswahl)</legend><div id="stakeholders"></div></fieldset>
 </section>
 <section class="step hidden" data-step="2"><p class="small">Teil 2 von 4</p><h2>Gemeinsam aktiv werden</h2><p>Ein Engagement ist freiwillig. Mit einer Interessensbekundung gehen Sie keine Verpflichtung ein.</p>
 <fieldset><legend>Wie könnten Sie sich engagieren? (Mehrfachauswahl)</legend><div id="volunteers"></div></fieldset>
@@ -91,19 +88,16 @@ options('roles','role',['Mutter / Vater','Grossmutter / Grossvater','Betreuungsp
 options('ages','age',['0–3','4–6','7–9','10–12','13+','Keine Kinder im Schulalter']);
 options('transport','transport',['Zu Fuss – selbständig','Zu Fuss – in Begleitung','Mit dem Velo','Mit dem Auto / anderen Verkehrsmitteln']);
 options('risks','risk',['Hohe Geschwindigkeit','Schlechte Sicht','Unsichere Querung','Gefährliche Abbiegemanöver','Viel Verkehr','Fehlendes Trottoir','Parkierte Fahrzeuge','Andere Gefahr']);
-options('observations','observation',['Ich empfinde die Stelle als unsicher','Wiederholt gefährliche Situationen beobachtet','Beinahe-Unfall beobachtet','Unfall selbst beobachtet']);
 options('problemTimes','problemTime',['Vor Schulbeginn','Mittags','Nach Schulschluss','Unabhängig von der Tageszeit']);
-options('improvements','improvement',['Sicherere Fussgängerstreifen','Geschwindigkeitsreduktion','Bessere Sichtverhältnisse','Bauliche Verbesserungen / Trottoirs','Mehr Verkehrskontrollen','Lotsendienst / Pedibus','Sensibilisierung / Hinweisschilder','Andere Massnahmen']);
-options('stakeholders','stakeholder',['Gemeinde','Kanton','Schule','Eltern / Elternrat','Anwohnerinnen und Anwohner','Weitere Organisationen']);
 options('volunteers','volunteer',['Schülerlotsendienst','Pedibus','Gelegentliche Stellvertretung','Organisation / Koordination','Derzeit kein Einsatz möglich']);
 options('frequencies','frequency',['1 × pro Woche','2 × pro Woche','3 × pro Woche','4 × pro Woche','5 × pro Woche','Gelegentlich / nach Absprache'],'radio');
 for(const [id,name] of [['supportA','signal'],['supportB','privateSign'],['supportC','audit']])options(id,name,['Ja, unterstütze ich','Vielleicht / mehr Informationen','Nein'],'radio');
 options('donation','donation',['Ja, eventuell','Vielleicht, erst nach konkretem Konzept','Nein'],'radio');
 for(let i=1;i<=7;i++)el('crossings').insertAdjacentHTML('beforeend',`<label><input type="checkbox" name="crossing" value="${i}">Nr. ${i}</label>`);
 options('othercrossings','crossingExtra',['Andere Querungsstelle','Keine Überquerung','Weiss ich nicht']);
-form.addEventListener('change',e=>{const t=e.target;if(t.name==='improvement'&&form.querySelectorAll('[name="improvement"]:checked').length>3){t.checked=false;el('improvementmessage').textContent='Bitte maximal drei Verbesserungen wählen.'}else if(t.name==='improvement')el('improvementmessage').textContent='';if(t.name==='volunteer'){if(t.value==='Derzeit kein Einsatz möglich'&&t.checked)form.querySelectorAll('[name="volunteer"]:not([value="Derzeit kein Einsatz möglich"])').forEach(x=>x.checked=false);else if(t.checked)form.querySelector('[name="volunteer"][value="Derzeit kein Einsatz möglich"]').checked=false;el('volunteerDetails').classList.toggle('hidden',!form.querySelector('[name="volunteer"]:checked:not([value="Derzeit kein Einsatz möglich"])'))}if(t.name==='donation')el('amountBlock').classList.toggle('hidden',t.value==='Nein');if(t.name==='crossingExtra'&&t.checked&&t.value!=='Andere Querungsstelle'){form.querySelectorAll('[name="crossing"]').forEach(x=>x.checked=false)}});
+form.addEventListener('change',e=>{const t=e.target;if(t.name==='volunteer'){if(t.value==='Derzeit kein Einsatz möglich'&&t.checked)form.querySelectorAll('[name="volunteer"]:not([value="Derzeit kein Einsatz möglich"])').forEach(x=>x.checked=false);else if(t.checked)form.querySelector('[name="volunteer"][value="Derzeit kein Einsatz möglich"]').checked=false;el('volunteerDetails').classList.toggle('hidden',!form.querySelector('[name="volunteer"]:checked:not([value="Derzeit kein Einsatz möglich"])'))}if(t.name==='donation')el('amountBlock').classList.toggle('hidden',t.value==='Nein');if(t.name==='crossingExtra'&&t.checked&&t.value!=='Andere Querungsstelle'){form.querySelectorAll('[name="crossing"]').forEach(x=>x.checked=false)}});
 const mapElement=el('map'),mapImage=el('map-image');
-mapImage.addEventListener('error',()=>{el('map-status').textContent='Der Ortsplan konnte nicht geladen werden. Bitte prüfen, ob Ortsplan_1.png im Hauptverzeichnis von GitHub liegt.'});
+mapImage.addEventListener('error',()=>{el('map-status').textContent='Der Ortsplan konnte nicht geladen werden. Bitte prüfen, ob ortsplan-cropped.png im Hauptverzeichnis von GitHub liegt.'});
 mapElement.addEventListener('click',e=>{
   if(e.target.closest('.danger-pin') || !mapImage.complete || !mapImage.naturalWidth)return;
   if(pins.length>=3){el('pinmessage').textContent='Maximal drei Gefahrenstellen möglich. Entfernen Sie zuerst eine Markierung.';return}
